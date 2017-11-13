@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
   it 'generates reverse mapping for default type' do
-    payload = { 'type' => 'foo' }
+    payload = {
+      'data' => { 'type' => 'foo' }
+    }
     klass = Class.new(JSONAPI::Deserializable::Resource) do
       type
     end
@@ -13,7 +15,9 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
   end
 
   it 'generates reverse mapping for overriden type' do
-    payload = { 'type' => 'foo' }
+    payload = {
+      'data' => { 'type' => 'foo' }
+    }
     klass = Class.new(JSONAPI::Deserializable::Resource) do
       type { |t| { custom_type: t } }
     end
@@ -24,7 +28,9 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
   end
 
   it 'generates reverse mapping for default id' do
-    payload = { 'type' => 'foo', 'id' => 'bar' }
+    payload = {
+      'data' => { 'type' => 'foo', 'id' => 'bar' }
+    }
     klass = Class.new(JSONAPI::Deserializable::Resource) do
       id
     end
@@ -35,7 +41,9 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
   end
 
   it 'generates reverse mapping for overriden id' do
-    payload = { 'type' => 'foo', 'id' => 'bar' }
+    payload = {
+      'data' => { 'type' => 'foo', 'id' => 'bar' }
+    }
     klass = Class.new(JSONAPI::Deserializable::Resource) do
       id { |i| { custom_id: i } }
     end
@@ -47,10 +55,12 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
 
   it 'generates reverse mapping for default attributes' do
     payload = {
-      'type' => 'foo',
-      'attributes' => {
-        'foo' => 'bar',
-        'baz' => 'fiz'
+      'data' => {
+        'type' => 'foo',
+        'attributes' => {
+          'foo' => 'bar',
+          'baz' => 'fiz'
+        }
       }
     }
     klass = Class.new(JSONAPI::Deserializable::Resource) do
@@ -65,10 +75,12 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
 
   it 'generates reverse mapping for locally overriden attributes' do
     payload = {
-      'type' => 'foo',
-      'attributes' => {
-        'foo' => 'bar',
-        'baz' => 'fiz'
+      'data' => {
+        'type' => 'foo',
+        'attributes' => {
+          'foo' => 'bar',
+          'baz' => 'fiz'
+        }
       }
     }
     klass = Class.new(JSONAPI::Deserializable::Resource) do
@@ -82,10 +94,12 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
 
   it 'generates reverse mapping for globally overriden attributes' do
     payload = {
-      'type' => 'foo',
-      'attributes' => {
-        'foo' => 'bar',
-        'baz' => 'fiz'
+      'data' => {
+        'type' => 'foo',
+        'attributes' => {
+          'foo' => 'bar',
+          'baz' => 'fiz'
+        }
       }
     }
     klass = Class.new(JSONAPI::Deserializable::Resource) do
@@ -103,13 +117,15 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
 
   it 'generates reverse mapping for default has_one' do
     payload = {
-      'type' => 'foo',
-      'relationships' => {
-        'foo' => {
-          'data' => nil
-        },
-        'baz' => {
-          'data' => nil
+      'data' => {
+        'type' => 'foo',
+        'relationships' => {
+          'foo' => {
+            'data' => nil
+          },
+          'baz' => {
+            'data' => nil
+          }
         }
       }
     }
@@ -127,13 +143,15 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
 
   it 'generates reverse mapping for overriden has_one' do
     payload = {
-      'type' => 'foo',
-      'relationships' => {
-        'foo' => {
-          'data' => nil
-        },
-        'baz' => {
-          'data' => nil
+      'data' => {
+        'type' => 'foo',
+        'relationships' => {
+          'foo' => {
+            'data' => nil
+          },
+          'baz' => {
+            'data' => nil
+          }
         }
       }
     }
@@ -159,13 +177,15 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
 
   it 'generates reverse mapping for default has_many' do
     payload = {
-      'type' => 'foo',
-      'relationships' => {
-        'foo' => {
-          'data' => []
-        },
-        'baz' => {
-          'data' => []
+      'data' => {
+        'type' => 'foo',
+        'relationships' => {
+          'foo' => {
+            'data' => []
+          },
+          'baz' => {
+            'data' => []
+          }
         }
       }
     }
@@ -181,15 +201,17 @@ describe JSONAPI::Deserializable::Resource, '#reverse_mapping' do
     expect(actual).to eq(expected)
   end
 
-  it 'generates reverse mapping for overriden has_many' do
+  it 'generates reverse mapping for overridden has_many' do
     payload = {
-      'type' => 'foo',
-      'relationships' => {
-        'foo' => {
-          'data' => []
-        },
-        'baz' => {
-          'data' => []
+      'data' => {
+        'type' => 'foo',
+        'relationships' => {
+          'foo' => {
+            'data' => []
+          },
+          'baz' => {
+            'data' => []
+          }
         }
       }
     }

@@ -36,7 +36,7 @@ module JSONAPI
       end
 
       def initialize(payload, root: '/data')
-        @data = payload || {}
+        @data = payload['data'] || {}
         @root = root
         @type = @data['type']
         @id   = @data['id']
